@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#3c9df0">
+<title>AquaDisc</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3CradialGradient id='g'%3E%3Cstop offset='0' stop-color='%23fff'/%3E%3Cstop offset='.6' stop-color='%23bfe8ff'/%3E%3Cstop offset='1' stop-color='%233c9df0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='32' cy='32' r='30' fill='url(%23g)' stroke='%231565c9' stroke-width='2'/%3E%3Ccircle cx='32' cy='32' r='9' fill='%23fff' stroke='%231565c9' stroke-width='2'/%3E%3Ccircle cx='32' cy='32' r='3.5' fill='%231565c9'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&family=Nunito:wght@500;700;800;900&family=Orbitron:wght@700;800;900&family=Permanent+Marker&family=VT323&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Doto:wght@700;900&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ============ ICONES ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-prev" viewBox="0 0 24 24"><path d="M5.5 5h2.4v14H5.5zM19.5 5.9v12.2c0 .7-.8 1.1-1.4.7l-9-6.1a.85.85 0 0 1 0-1.4l9-6.1c.6-.4 1.4 0 1.4.7z"/></symbol>
+  <symbol id="i-next" viewBox="0 0 24 24"><path d="M16.1 5h2.4v14h-2.4zM4.5 5.9v12.2c0 .7.8 1.1 1.4.7l9-6.1a.85.85 0 0 0 0-1.4l-9-6.1c-.6-.4-1.4 0-1.4.7z"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.3v13.4c0 .8.9 1.3 1.6.9l10.2-6.7a1 1 0 0 0 0-1.7L9.6 4.4C8.9 4 8 4.5 8 5.3z"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><rect x="6" y="5" width="4.2" height="14" rx="1.1"/><rect x="13.8" y="5" width="4.2" height="14" rx="1.1"/></symbol>
+  <symbol id="i-stop" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="1.8"/></symbol>
+  <symbol id="i-repeat" viewBox="0 0 24 24"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/></symbol>
+  <symbol id="i-shuffle" viewBox="0 0 24 24"><path d="M10.59 9.17 5.41 4 4 5.41l5.17 5.17 1.42-1.41zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.46 20 9.5V4h-5.5zm.33 9.41-1.41 1.41 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04-3.13-3.13z"/></symbol>
+  <symbol id="i-discs" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zm0 11.6a2.6 2.6 0 1 1 0-5.2 2.6 2.6 0 0 1 0 5.2z" opacity=".95"/><path d="M12 5.2a6.8 6.8 0 0 1 6.8 6.8h-1.6A5.2 5.2 0 0 0 12 6.8V5.2z" fill="#fff" opacity=".55"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path d="M3 5h2.4v2.4H3zm5 .2h13v2H8zM3 10.8h2.4v2.4H3zm5 .2h13v2H8zM3 16.6h2.4V19H3zm5 .2h13v2H8z"/></symbol>
+  <symbol id="i-chev-l" viewBox="0 0 24 24"><path d="M15.4 4.6 8 12l7.4 7.4 1.6-1.6L11.2 12 17 6.2z"/></symbol>
+  <symbol id="i-chev-r" viewBox="0 0 24 24"><path d="M8.6 4.6 16 12l-7.4 7.4L7 17.8 12.8 12 7 6.2z"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M10.8 4h2.4v6.8H20v2.4h-6.8V20h-2.4v-6.8H4v-2.4h6.8z"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6.3 4.6 12 10.3l5.7-5.7 1.7 1.7-5.7 5.7 5.7 5.7-1.7 1.7-5.7-5.7-5.7 5.7-1.7-1.7 5.7-5.7-5.7-5.7z"/></symbol>
+  <symbol id="i-more" viewBox="0 0 24 24"><circle cx="5" cy="12" r="2.2"/><circle cx="12" cy="12" r="2.2"/><circle cx="19" cy="12" r="2.2"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M9 3h6l1 2h4v2H4V5h4l1-2zm-3 6h12l-.9 11.1A2 2 0 0 1 15.1 22H8.9a2 2 0 0 1-2-1.9L6 9z"/></symbol>
+  <symbol id="i-edit" viewBox="0 0 24 24"><path d="M4 17.2V20h2.8L17.6 9.2l-2.8-2.8L4 17.2zM20.7 6.1a1 1 0 0 0 0-1.4l-1.4-1.4a1 1 0 0 0-1.4 0l-1.6 1.6 2.8 2.8 1.6-1.6z"/></symbol>
+  <symbol id="i-image" viewBox="0 0 24 24"><path d="M5 4h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm0 12.5V18h14v-3.2l-3.6-3.6-4.4 4.4-2.6-2.6L5 16.5zM8.5 7a1.8 1.8 0 1 0 0 3.6 1.8 1.8 0 0 0 0-3.6z"/></symbol>
+  <symbol id="i-sync" viewBox="0 0 24 24"><path d="M12 4V1L8 5l4 4V6a6 6 0 0 1 5.65 8.03l1.53 1.53A8 8 0 0 0 12 4zm0 14a6 6 0 0 1-5.65-8.03L4.82 8.44A8 8 0 0 0 12 20v3l4-4-4-4v3z"/></symbol>
+  <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 6.5A2.5 2.5 0 0 1 5.5 4h4l2 2.2h7A2.5 2.5 0 0 1 21 8.7v8.8a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 17.5v-11z"/></symbol>
+  <symbol id="i-note" viewBox="0 0 24 24"><path d="M9 4.5 20 2v13.5a3.2 3.2 0 1 1-2-2.95V6.6l-7 1.6v9.3A3.2 3.2 0 1 1 9 14.55V4.5z"/></symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24"><path d="M19.4 13a7.7 7.7 0 0 0 0-2l2.1-1.6-2-3.5-2.5 1a7.4 7.4 0 0 0-1.7-1L15 3.3h-4l-.4 2.6a7.4 7.4 0 0 0-1.7 1l-2.5-1-2 3.5L6.6 11a7.7 7.7 0 0 0 0 2l-2.1 1.6 2 3.5 2.5-1a7.4 7.4 0 0 0 1.7 1l.4 2.6h4l.4-2.6a7.4 7.4 0 0 0 1.7-1l2.5 1 2-3.5L19.4 13zM12 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z"/></symbol>
+  <symbol id="i-vol" viewBox="0 0 24 24"><path d="M4 9h3.5L12 5v14l-4.5-4H4V9zm11.5 3a4 4 0 0 0-2-3.46v6.92a4 4 0 0 0 2-3.46zM13.5 3.6v2.1a6.5 6.5 0 0 1 0 12.6v2.1a8.5 8.5 0 0 0 0-16.8z"/></symbol>
+  <symbol id="i-mute" viewBox="0 0 24 24"><path d="M4 9h3.5L12 5v14l-4.5-4H4V9zm12.3-.7L18 10l1.7-1.7 1.4 1.4L19.4 11.4l1.7 1.7-1.4 1.4-1.7-1.7-1.7 1.7-1.4-1.4 1.7-1.7-1.7-1.7z"/></symbol>
+  <symbol id="i-wave" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm4.6 14.4a.7.7 0 0 1-1 .23c-2.6-1.6-5.9-2-9.8-1.1a.7.7 0 1 1-.32-1.37c4.2-.96 7.9-.55 10.8 1.24.34.2.44.65.23.98zm1.3-2.9a.9.9 0 0 1-1.2.29c-3-1.84-7.5-2.37-11-1.3a.9.9 0 0 1-.52-1.72c4-1.2 9-.62 12.4 1.5.42.26.55.81.29 1.23zm.11-3c-3.6-2.13-9.5-2.33-12.9-1.29a1.05 1.05 0 1 1-.61-2.01c3.9-1.19 10.5-.96 14.6 1.5a1.05 1.05 0 0 1-1.07 1.8z"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M9.2 16.6 4.6 12l-1.7 1.7 6.3 6.3L21.1 8.1l-1.7-1.7z"/></symbol>
+</svg>
+
+<div id="app" class="booting">
+
+  <!-- ============ DÉCOR ============ -->
+  <div class="bg" aria-hidden="true">
+    <div class="sky"></div>
+    <div class="rays"></div>
+    <div class="clouds"><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="orbs"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="water"></div>
+    <div class="horizon-glow"></div>
+  </div>
+
+  <div class="scene scene-refl" aria-hidden="true"><div class="stage"><div class="mirror" id="mirror"></div></div></div>
+  <canvas id="waterfx" aria-hidden="true"></canvas>
+  <div class="scene scene-main" aria-hidden="true"><div class="stage" id="stage"></div></div>
+
+  <button class="disc-hit" id="discHit" type="button" aria-label="Lecture / pause"></button>
+
+  <button class="disc-nav prev" id="discPrev" type="button" title="Disque précédent (↑)">
+    <span class="dn-ball"><svg><use href="#i-chev-l"/></svg></span><span class="dn-label">DISC</span>
+  </button>
+  <button class="disc-nav next" id="discNext" type="button" title="Disque suivant (↓)">
+    <span class="dn-ball"><svg><use href="#i-chev-r"/></svg></span><span class="dn-label">DISC</span>
+  </button>
+
+  <div class="empty-cta" id="emptyCta">
+    <button class="gel gel-wide" id="btnEmptyAdd" type="button"><svg><use href="#i-plus"/></svg><span>INSÉRER UN DISQUE</span></button>
+    <p>Importe une playlist Spotify ou tes propres fichiers audio.</p>
+  </div>
+
+  <!-- ============ HUD ============ -->
+  <header class="hud">
+    <div class="hud-block left">
+      <div class="lens">TRACK</div>
+      <div class="digits" id="hudTrack" aria-live="off">--</div>
+    </div>
+    <div class="hud-block right">
+      <div class="lens">TIME</div>
+      <button class="digits" id="hudTime" type="button" title="Temps écoulé / restant">--:--</button>
+    </div>
+  </header>
+
+  <!-- ============ CONSOLE ============ -->
+  <footer class="deck" id="deck">
+    <div class="lcd" id="lcd">
+      <canvas class="lcd-spec" id="lcdSpec" width="72" height="30"></canvas>
+      <div class="lcd-main">
+        <div class="lcd-marquee" id="lcdMarquee"><div class="lcd-track" id="lcdTrack"><span></span></div></div>
+        <div class="lcd-badges" id="lcdBadges"></div>
+      </div>
+      <div class="lcd-prog">
+        <span class="lcd-t" id="lcdElapsed">00:00</span>
+        <div class="lcd-bar" id="lcdBar" role="slider" aria-label="Position" tabindex="0" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="lcd-bar-on" id="lcdBarOn"></div></div>
+        <span class="lcd-t" id="lcdTotal">00:00</span>
+      </div>
+    </div>
+
+    <div class="deck-row">
+      <div class="deck-side left">
+        <button class="round" id="btnDiscs" type="button" title="Discothèque (D)"><span class="round-ball"><svg><use href="#i-discs"/></svg></span><span class="round-label">DISQUES</span></button>
+      </div>
+
+      <div class="transport" role="group" aria-label="Commandes">
+        <button class="gel" id="btnPrev" type="button" title="Précédent (←)"><svg><use href="#i-prev"/></svg></button>
+        <button class="gel" id="btnStop" type="button" title="Stop"><svg><use href="#i-stop"/></svg></button>
+        <button class="gel gel-play" id="btnPlay" type="button" title="Lecture / pause (Espace)"><svg class="ic-play"><use href="#i-play"/></svg><svg class="ic-pause"><use href="#i-pause"/></svg></button>
+        <button class="gel" id="btnNext" type="button" title="Suivant (→)"><svg><use href="#i-next"/></svg></button>
+        <button class="gel gel-toggle" id="btnRepeat" type="button" title="Répéter"><svg><use href="#i-repeat"/></svg><b class="rep1">1</b><i class="led"></i></button>
+        <button class="gel gel-toggle" id="btnShuffle" type="button" title="Aléatoire"><svg><use href="#i-shuffle"/></svg><i class="led"></i></button>
+      </div>
+
+      <div class="deck-side right">
+        <div class="vol" id="vol" title="Volume">
+          <button class="vol-ic" id="btnMute" type="button" aria-label="Couper le son"><svg class="ic-vol"><use href="#i-vol"/></svg><svg class="ic-mute"><use href="#i-mute"/></svg></button>
+          <input type="range" id="volRange" min="0" max="100" step="1" value="80" aria-label="Volume">
+          <span class="vol-num" id="volNum">80</span>
+        </div>
+        <button class="round" id="btnList" type="button" title="Liste des titres (L)"><span class="round-ball"><svg><use href="#i-list"/></svg></span><span class="round-label">LISTE</span></button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============ DISCOTHÈQUE ============ -->
+  <section class="rack glass" id="rack" aria-label="Discothèque" aria-hidden="true">
+    <div class="rack-head">
+      <div class="rack-title"><span class="t-big">DISCOTHÈQUE</span><span class="t-small" id="rackCount">0 disque</span></div>
+      <div class="rack-actions">
+        <button class="chip" id="rackAddLocal" type="button"><svg><use href="#i-folder"/></svg>Disque local</button>
+        <button class="chip chip-sp" id="rackAddSpotify" type="button"><svg><use href="#i-wave"/></svg>Spotify</button>
+        <button class="icon-btn" id="rackSettings" type="button" title="Réglages"><svg><use href="#i-gear"/></svg></button>
+        <button class="icon-btn" id="rackClose" type="button" title="Fermer"><svg><use href="#i-close"/></svg></button>
+      </div>
+    </div>
+    <div class="rack-list" id="rackList"></div>
+    <div class="rack-foot" id="rackFoot"></div>
+  </section>
+
+  <!-- ============ LISTE DES TITRES ============ -->
+  <aside class="panel glass" id="panel" aria-label="Liste des titres" aria-hidden="true">
+    <div class="panel-head">
+      <div class="ph-art" id="phArt"></div>
+      <div class="ph-info">
+        <div class="ph-kind" id="phKind">—</div>
+        <div class="ph-name" id="phName">Aucun disque</div>
+        <div class="ph-meta" id="phMeta"></div>
+      </div>
+      <button class="icon-btn" id="panelClose" type="button" title="Fermer"><svg><use href="#i-close"/></svg></button>
+    </div>
+    <div class="panel-tools" id="panelTools"></div>
+    <ol class="tracks" id="trackList"></ol>
+    <div class="sp-box" id="spBox">
+      <div class="sp-head"><svg><use href="#i-wave"/></svg><span id="spTitle">LIAISON SPOTIFY</span><i class="sp-led" id="spLed"></i></div>
+      <div class="sp-frame"><div id="spotifyHost"></div></div>
+      <div class="yt-frame"><div id="ytHost"></div></div>
+      <p class="sp-hint" id="spHint"></p>
+      <div class="sp-acts" id="spActs"></div>
+    </div>
+  </aside>
+
+  <!-- ============ FENÊTRES ============ -->
+  <div class="modal-layer" id="modalLayer" aria-hidden="true">
+    <div class="modal-backdrop" data-close></div>
+
+    <!-- Import -->
+    <div class="win glass" id="winImport" role="dialog" aria-modal="true" aria-labelledby="winImportTitle">
+      <div class="win-bar"><span id="winImportTitle">GRAVER UN DISQUE</span><button class="win-x" type="button" data-close aria-label="Fermer"><svg><use href="#i-close"/></svg></button></div>
+      <div class="win-tabs" role="tablist">
+        <button class="tab" type="button" role="tab" data-tab="local"><svg><use href="#i-folder"/></svg>Mes fichiers</button>
+        <button class="tab" type="button" role="tab" data-tab="spotify"><svg><use href="#i-wave"/></svg>Spotify</button>
+      </div>
+
+      <div class="win-body" data-pane="local">
+        <div class="dropzone" id="dropzone">
+          <div class="dz-disc"></div>
+          <div class="dz-text">
+            <strong>Glisse tes musiques ici</strong>
+            <span>MP3, M4A, FLAC, WAV, OGG… ou un dossier entier</span>
+          </div>
+          <div class="dz-btns">
+            <button class="chip" id="pickFiles" type="button"><svg><use href="#i-note"/></svg>Choisir des fichiers</button>
+            <button class="chip" id="pickFolder" type="button"><svg><use href="#i-folder"/></svg>Choisir un dossier</button>
+          </div>
+        </div>
+        <div class="staged" id="staged" hidden>
+          <div class="staged-sum" id="stagedSum"></div>
+          <button class="link-btn" id="stagedClear" type="button">Vider</button>
+        </div>
+        <div class="form-row">
+          <label class="field">
+            <span>Nom du disque</span>
+            <input type="text" id="localName" maxlength="60" placeholder="Ma compil" autocomplete="off">
+          </label>
+          <button class="cover-pick" id="coverPick" type="button" title="Pochette (optionnel)"><span class="cp-img" id="coverPrev"></span><span class="cp-txt">Pochette<br><small>optionnel</small></span></button>
+        </div>
+        <label class="check" id="splitRow" hidden><input type="checkbox" id="splitFolders"> <span>Un disque par dossier</span></label>
+        <div class="burn" id="localBurn" hidden><div class="burn-bar"><i></i></div><span class="burn-txt"></span></div>
+        <div class="win-foot">
+          <p class="hint">Les fichiers restent sur ton PC : ils sont gardés dans le navigateur, rien n'est envoyé.</p>
+          <button class="gel gel-wide gel-go" id="burnLocal" type="button" disabled><span>GRAVER LE DISQUE</span></button>
+        </div>
+      </div>
+
+      <div class="win-body" data-pane="spotify">
+        <div class="sp-steps">
+          <p>Dans Spotify : <b>•••</b> → <b>Partager</b> → <b>Copier le lien</b>, puis colle-le ici.</p>
+        </div>
+        <div class="url-row">
+          <input type="url" id="spUrl" placeholder="https://open.spotify.com/playlist/…" autocomplete="off" spellcheck="false">
+          <button class="gel gel-mini" id="spFetch" type="button"><span>CHERCHER</span></button>
+        </div>
+        <div class="sp-msg" id="spMsg" hidden></div>
+        <div class="my-pl" id="myPl" hidden>
+          <div class="my-pl-head"><b>Mes playlists</b><button class="link-btn" id="myPlRefresh" type="button">Actualiser</button></div>
+          <div class="my-pl-list" id="myPlList"></div>
+        </div>
+        <div class="sp-found" id="spFound" hidden>
+          <div class="spf-art" id="spfArt"></div>
+          <div class="spf-info">
+            <div class="spf-kind" id="spfKind"></div>
+            <div class="spf-name" id="spfName"></div>
+            <div class="spf-meta" id="spfMeta"></div>
+          </div>
+        </div>
+        <div class="burn" id="spBurn" hidden><div class="burn-bar"><i></i></div><span class="burn-txt"></span></div>
+        <div class="win-foot">
+          <p class="hint" id="spImportHint">Playlists publiques, albums ou titres. Sans compte connecté, Spotify ne donne que les 100 premiers titres d'une playlist.</p>
+          <button class="gel gel-wide gel-go" id="burnSpotify" type="button" disabled><span>GRAVER LE DISQUE</span></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Question / confirmation -->
+    <div class="win glass win-small" id="winAsk" role="dialog" aria-modal="true" aria-labelledby="askTitle">
+      <div class="win-bar"><span id="askTitle">AQUADISC</span><button class="win-x" type="button" data-close aria-label="Fermer"><svg><use href="#i-close"/></svg></button></div>
+      <div class="win-body is-on">
+        <p class="ask-text" id="askText"></p>
+        <input type="text" class="ask-input" id="askInput" maxlength="60" autocomplete="off">
+        <div class="ask-btns">
+          <button class="chip" id="askNo" type="button">Annuler</button>
+          <button class="gel gel-mini" id="askYes" type="button"><span>OK</span></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Connexion Spotify Premium -->
+    <div class="win glass" id="winPremium" role="dialog" aria-modal="true" aria-labelledby="premTitle">
+      <div class="win-bar"><span id="premTitle">SPOTIFY PREMIUM</span><button class="win-x" type="button" data-close aria-label="Fermer"><svg><use href="#i-close"/></svg></button></div>
+      <div class="win-body is-on">
+        <p class="prem-intro">Spotify ne donne les <b>titres complets</b> et le <b>réglage du volume</b> qu'à son lecteur officiel, avec un compte <b>Premium</b>. Il faut créer une clé gratuite, une seule fois (2 minutes) :</p>
+        <ol class="prem-steps">
+          <li>Ouvre <a href="https://developer.spotify.com/dashboard" target="_blank" rel="noopener">developer.spotify.com/dashboard</a>, connecte-toi avec ton compte Spotify, accepte les conditions puis clique <b>Create app</b>.</li>
+          <li>Nom : <b>AquaDisc</b>, description au choix. Dans <b>Redirect URIs</b>, colle exactement ceci puis clique <b>Add</b> :
+            <span class="copy-row"><code id="premRedirect">http://127.0.0.1:5177/</code><button class="chip" id="premCopy" type="button">Copier</button></span></li>
+          <li>Coche <b>Web API</b> et <b>Web Playback SDK</b>, accepte et clique <b>Save</b>.</li>
+          <li>Dans l'app créée, ouvre <b>Settings</b>, copie le <b>Client ID</b> et colle-le ici :</li>
+        </ol>
+        <div class="url-row">
+          <input type="text" id="premClient" placeholder="Client ID (32 caractères)" autocomplete="off" spellcheck="false" maxlength="64">
+          <button class="gel gel-mini gel-go" id="premGo" type="button"><span>CONNECTER</span></button>
+        </div>
+        <div class="sp-msg" id="premMsg" hidden></div>
+        <p class="hint prem-foot">Spotify te demande d'autoriser AquaDisc, puis te renvoie ici. Aucun mot de passe n'est gardé par le site. Si Spotify affiche « user not registered », ajoute ton e-mail Spotify dans <b>User Management</b> de l'app.</p>
+      </div>
+    </div>
+
+    <!-- Réglages -->
+    <div class="win glass win-small" id="winSettings" role="dialog" aria-modal="true" aria-labelledby="setTitle">
+      <div class="win-bar"><span id="setTitle">RÉGLAGES</span><button class="win-x" type="button" data-close aria-label="Fermer"><svg><use href="#i-close"/></svg></button></div>
+      <div class="win-body is-on">
+        <div class="set-row">
+          <div><b>Compte Spotify Premium</b><small id="setPremTxt">Titres complets et volume réglable pour tes disques Spotify.</small></div>
+          <button class="chip chip-sp" id="setPremBtn" type="button">Connecter</button>
+        </div>
+        <div class="set-row">
+          <div><b>Lecture des disques Spotify</b><small>« Complet » : ton compte Premium s'il est connecté, sinon le morceau entier retrouvé sur YouTube (gratuit, sans compte). « Lecteur Spotify » : le petit lecteur officiel (extraits si tu n'es pas connecté, volume non réglable).</small></div>
+          <div class="seg seg-col" id="setSpMode"><button type="button" data-v="auto">Complet</button><button type="button" data-v="embed">Lecteur Spotify</button><button type="button" data-v="preview">Extraits 30 s</button></div>
+        </div>
+        <div class="set-row">
+          <div><b>Bruitages</b><small>Petits sons quand le disque change.</small></div>
+          <button class="switch" id="setSfx" type="button" role="switch"><i></i></button>
+        </div>
+        <div class="set-row">
+          <div><b>Effet écran CRT</b><small>Lignes de balayage façon vieille télé.</small></div>
+          <button class="switch" id="setCrt" type="button" role="switch"><i></i></button>
+        </div>
+        <div class="set-keys">
+          <b>Raccourcis</b>
+          <span><kbd>Espace</kbd> lecture</span><span><kbd>←</kbd><kbd>→</kbd> titre</span><span><kbd>↑</kbd><kbd>↓</kbd> disque</span><span><kbd>D</kbd> disques</span><span><kbd>L</kbd> liste</span><span><kbd>M</kbd> muet</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- menu contextuel -->
+  <div class="menu glass" id="menu" hidden></div>
+
+  <div class="toasts" id="toasts" aria-live="polite"></div>
+  <div class="drop-overlay" id="dropOverlay"><div class="do-inner"><div class="dz-disc big"></div><b>Lâche pour graver un disque</b></div></div>
+  <div class="crt" id="crt" aria-hidden="true"></div>
+
+  <!-- ============ ÉCRAN DE DÉMARRAGE ============ -->
+  <div class="splash" id="splash">
+    <div class="splash-inner">
+      <div class="logo">
+        <div class="logo-disc"><i></i></div>
+        <div class="logo-text"><span class="lt-a">AQUA</span><span class="lt-b">DISC</span></div>
+      </div>
+      <div class="splash-sub">DIGITAL&nbsp;AUDIO&nbsp;PLAYER</div>
+      <button class="splash-start" id="splashStart" type="button"><span class="blink">▶ APPUIE POUR DÉMARRER</span></button>
+      <div class="splash-note" id="splashNote"></div>
+    </div>
+  </div>
+</div>
+
+<input type="file" id="fileInput" accept="audio/*,.mp3,.m4a,.aac,.flac,.wav,.ogg,.oga,.opus,.webm,.weba" multiple hidden>
+<input type="file" id="folderInput" webkitdirectory directory multiple hidden>
+<input type="file" id="coverInput" accept="image/*" hidden>
+<input type="file" id="addInput" accept="audio/*,.mp3,.m4a,.aac,.flac,.wav,.ogg,.oga,.opus,.webm,.weba" multiple hidden>
+
+<script src="js/util.js"></script>
+<script src="js/db.js"></script>
+<script src="js/meta.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/spotify-premium.js"></script>
+<script src="js/youtube.js"></script>
+<script src="js/disc.js"></script>
+<script src="js/scene.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
